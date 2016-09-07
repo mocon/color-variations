@@ -15,7 +15,6 @@ var scssPalette = '',
 
 palette.map(function(color, index) {
     var currentColor = Color(color.hex),
-        currentColorRgb = currentColor.values.rgb,
         currentColorLight1 = currentColor.clone().lighten(0.05),
         currentColorLight2 = currentColor.clone().lighten(0.10),
         currentColorLight3 = currentColor.clone().lighten(0.15),
@@ -38,16 +37,17 @@ palette.map(function(color, index) {
     color.scss += `$${color.name}-dark-4: mix(black, $${color.name}, 30%);\n\n`;
 
     // Assemble .js code for each color and all its variations
-    jsPalette[color.name] = {};
-    jsPalette[color.name].color = `rgb(${currentColorRgb})`;
-    jsPalette[color.name].colorLight1 = `rgb(${currentColorLight1.values.rgb})`;
-    jsPalette[color.name].colorLight2 = `rgb(${currentColorLight2.values.rgb})`;
-    jsPalette[color.name].colorLight3 = `rgb(${currentColorLight3.values.rgb})`;
-    jsPalette[color.name].colorLight4 = `rgb(${currentColorLight4.values.rgb})`;
-    jsPalette[color.name].colorDark1 = `rgb(${currentColorDark1.values.rgb})`;
-    jsPalette[color.name].colorDark2 = `rgb(${currentColorDark2.values.rgb})`;
-    jsPalette[color.name].colorDark3 = `rgb(${currentColorDark3.values.rgb})`;
-    jsPalette[color.name].colorDark4 = `rgb(${currentColorDark4.values.rgb})`;
+    jsPalette[color.name] = {
+        color: `rgb(${currentColor.values.rgb})`,
+        colorLight1: `rgb(${currentColorLight1.values.rgb})`,
+        colorLight2: `rgb(${currentColorLight2.values.rgb})`,
+        colorLight3: `rgb(${currentColorLight3.values.rgb})`,
+        colorLight4: `rgb(${currentColorLight4.values.rgb})`,
+        colorDark1: `rgb(${currentColorDark1.values.rgb})`,
+        colorDark2: `rgb(${currentColorDark2.values.rgb})`,
+        colorDark3: `rgb(${currentColorDark3.values.rgb})`,
+        colorDark4: `rgb(${currentColorDark4.values.rgb})`
+    };
 
     // Add this color to Scss palette
     scssPalette += color.scss;
